@@ -1,0 +1,50 @@
+GS Tours — Hostinger Business (Node.js Web App)
+================================================
+
+Domain in your last deploy: gstoursadmin.com
+
+Do NOT upload into File Manager / public_html.
+Use: Websites → Add Website → Node.js web app → Upload your files.
+
+1) Database (required — Hostinger MySQL will not work)
+   Create a free Postgres database:
+     https://supabase.com  or  https://neon.tech
+   Copy the URI that starts with postgresql://
+   That is DATABASE_URL.
+
+2) Upload THIS zip
+   Websites → Add Website → Node.js web app → Upload your files
+   Choose gstours-hostinger.zip
+   If gstoursadmin.com already has a website slot, remove that slot first
+   and create a fresh Node.js web app.
+
+3) Build settings (Hostinger default npm run build is now correct)
+   Node.js version     22
+   Framework           Nitro   (or Other)
+   Build command       npm run build
+   Output directory    .output
+   Entry file          .output/server/index.mjs
+   Start command       npm start
+                       (if asked)
+
+4) Environment variables — add these, then Redeploy
+   DATABASE_URL         postgresql://USER:PASSWORD@HOST:5432/postgres
+   BETTER_AUTH_URL      https://gstoursadmin.com
+   BETTER_AUTH_SECRET   a long random string (32+ characters)
+   VITE_AUTH_ENABLED    true
+   NITRO_PRESET         node-server
+   NODE_ENV             production
+
+5) After a green build
+   Open https://gstoursadmin.com
+   Team sign in → create the first account
+   Settings: KvK, IBAN, then Hostinger SMTP:
+     host     smtp.hostinger.com
+     port     465
+     user     your Hostinger mailbox
+     password that mailbox password
+     from     same address
+
+If the build fails, open Deployments → Build logs.
+If the site is blank after a green build, open Runtime logs.
+Usual cause: DATABASE_URL missing, or Entry file not .output/server/index.mjs.

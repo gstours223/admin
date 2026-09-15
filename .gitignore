@@ -1,0 +1,13 @@
+node_modules/
+.output/
+.vercel/
+.tanstack/
+dist/
+.env
+.env.local
+*.pid
+pglite.data
+.pglite/
+artifacts/
+screenshots/
+attachments/
